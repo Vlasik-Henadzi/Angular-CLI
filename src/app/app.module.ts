@@ -21,6 +21,7 @@ import { ContactComponent } from './contact/contact.component';
 
 import {DishService} from "./service/dish.service";
 import {PromotionService} from "./service/promotion.service";
+import {LeaderService} from "./service/leader.service";
 
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 
@@ -46,7 +47,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
     MatButtonModule,
     FlexLayoutModule
   ],
-  providers: [DishService, PromotionService],
+  providers: [DishService, PromotionService, LeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
