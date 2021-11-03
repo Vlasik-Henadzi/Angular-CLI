@@ -17,6 +17,7 @@ import {MatSliderChange} from "@angular/material/slider";
 export class DishdetailComponent implements OnInit {
 
   dish: Dish | undefined;
+  dishcopy: Dish | undefined;
   errMess: string | undefined;
   dishIds: string[] | any;
   prev: string | undefined;
@@ -89,7 +90,13 @@ export class DishdetailComponent implements OnInit {
     if (this.comment != undefined) {
       const d = new Date();
       this.comment.date = d.toISOString();
-      this.dish?.comments?.push(this.comment);
+      //this.dish?.comments?.push(this.comment);
+      this.dishcopy?.comments?.push(this.comment);
+      this.dishservice.putDish(this.dishcopy)
+        .subscribe(dish => {
+            this.dish = dish; this.dishcopy = dish;
+          },
+          errmess => { this.dish = undefined; this.dishcopy = undefined; this.errMess = <any>errmess; });
     }
     this.commentFormDirective.resetForm();
     this.rating = 5;
@@ -112,6 +119,7 @@ export class DishdetailComponent implements OnInit {
       .pipe(switchMap((params: Params) => this.dishservice.getDish(params["id"])))
       .subscribe(dish => {
         this.dish = dish;
+        this.dishcopy = dish;
         this.setPrevNext(dish.id);
       }, errmess => this.errMess = <any>errmess);
   }
