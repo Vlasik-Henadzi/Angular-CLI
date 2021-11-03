@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Leader} from "../shared/leader";
 import {LeaderService} from "../service/leader.service";
-import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-about',
@@ -11,6 +10,7 @@ import {FormBuilder} from "@angular/forms";
 export class AboutComponent implements OnInit {
 
   leaders: Leader[] | undefined;
+  errMess: string | undefined;
 
   constructor(private leaderService: LeaderService,
               @Inject('BaseURL') public baseURL: any) {
@@ -18,7 +18,8 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.leaderService.getLeaders()
-      .subscribe(value => this.leaders = value);
+      .subscribe(value => this.leaders = value,
+        errmess => this.errMess = <any>errmess);
   }
 
 }
