@@ -6,6 +6,6 @@ export class Feedback {
   agree: boolean | undefined;
   contacttype: string | undefined;
   message: string | undefined;
-};
+}
 
 export const ContactType = ['None', 'Tel', 'Email'];
