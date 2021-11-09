@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Dish} from "../shared/dish";
+import {Tour} from "../shared/tour";
 import {Observable} from "rxjs";
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -9,39 +9,39 @@ import {ProcessHTTPMsgService} from './process-httpmsg.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DishService {
+export class TourService {
 
   constructor(private http: HttpClient,
               private processHTTPMsgService: ProcessHTTPMsgService) {
   }
 
-  getDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(baseURL + 'dishes')
+  getTours(): Observable<Tour[]> {
+    return this.http.get<Tour[]>(baseURL + 'tours')
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getDish(id: number): Observable<Dish> {
-    return this.http.get<Dish>(baseURL + 'dishes/' + id)
+  getTour(id: number): Observable<Tour> {
+    return this.http.get<Tour>(baseURL + 'tours/' + id)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getFeaturedDish(): Observable<Dish> {
-    return this.http.get<Dish[]>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]))
+  getFeaturedTour(): Observable<Tour> {
+    return this.http.get<Tour[]>(baseURL + 'tours?featured=true').pipe(map(dishes => dishes[0]))
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
-  getDishIds(): Observable<number[] | any> {
-    return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
+  getTourIds(): Observable<number[] | any> {
+    return this.getTours().pipe(map(dishes => dishes.map(dish => dish.id)))
       .pipe(catchError(error => error));
   }
 
-  putDish(dish: Dish | any): Observable<Dish> {
+  putTour(tour: Tour | any): Observable<Tour> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
+        'Content-Type': 'application/json'
       })
     };
-    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish, httpOptions)
+    return this.http.put<Tour>(baseURL + 'tours/' + tour.id, tour, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
 
   }

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Dish} from "../shared/dish";
-import {DishService} from "../service/dish.service";
+import {Tour} from "../shared/tour";
+import {TourService} from "../service/tour.service";
 import {Promotion} from "../shared/promotion";
 import {PromotionService} from "../service/promotion.service";
 import {Leader} from "../shared/leader";
@@ -21,21 +21,21 @@ import {expand, flyInOut} from "../animations/app.animations";
   ]
 })
 export class HomeComponent implements OnInit {
-  dish: Dish | undefined;
+  tour: Tour | undefined;
   promotion: Promotion | undefined;
   leader: Leader | undefined;
   errDishMess: string | undefined;
   errPromotionMess: string | undefined;
   errLeaderMess: string | undefined;
 
-  constructor(private dishService: DishService, private promotionService: PromotionService,
+  constructor(private tourService: TourService, private promotionService: PromotionService,
               private leaderService: LeaderService,
               @Inject('BaseURL') public baseURL: any) {
   }
 
   ngOnInit(): void {
-    this.dishService.getFeaturedDish()
-      .subscribe(value => this.dish = value,
+    this.tourService.getFeaturedTour()
+      .subscribe(value => this.tour = value,
         errmess => this.errDishMess = <any>errmess);
     this.promotionService.getFeaturedPromotions()
       .subscribe(value => this.promotion = value,

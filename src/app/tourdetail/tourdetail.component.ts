@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {Dish} from "../shared/dish";
-import {DishService} from '../service/dish.service';
+import {Tour} from "../shared/tour";
+import {TourService} from '../service/tour.service';
 
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
@@ -12,19 +12,19 @@ import {expand, visibility} from "../animations/app.animations";
 
 @Component({
   selector: 'app-dishdetail',
-  templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss'],
+  templateUrl: './tourdetail.component.html',
+  styleUrls: ['./tourdetail.component.scss'],
   animations: [
     visibility(),
     expand()
   ]
 })
-export class DishdetailComponent implements OnInit {
+export class TourdetailComponent implements OnInit {
 
-  dish: Dish | undefined;
-  dishcopy: Dish | undefined;
+  tour: Tour | undefined;
+  tourcopy: Tour | undefined;
   errMess: string | undefined;
-  dishIds: string[] | any;
+  tourIds: string[] | any;
   prev: string | undefined;
   next: string | undefined;
   visibility = 'shown';
@@ -51,7 +51,7 @@ export class DishdetailComponent implements OnInit {
     }
   }
 
-  constructor(private dishservice: DishService,
+  constructor(private tourservice: TourService,
               private route: ActivatedRoute,
               private location: Location,
               private fb: FormBuilder,
@@ -96,16 +96,15 @@ export class DishdetailComponent implements OnInit {
     if (this.comment != undefined) {
       const d = new Date();
       this.comment.date = d.toISOString();
-      //this.dish?.comments?.push(this.comment);
-      this.dishcopy?.comments?.push(this.comment);
-      this.dishservice.putDish(this.dishcopy)
+      this.tourcopy?.comments?.push(this.comment);
+      this.tourservice.putTour(this.tourcopy)
         .subscribe(dish => {
-            this.dish = dish;
-            this.dishcopy = dish;
+            this.tour = dish;
+            this.tourcopy = dish;
           },
           errmess => {
-            this.dish = undefined;
-            this.dishcopy = undefined;
+            this.tour = undefined;
+            this.tourcopy = undefined;
             this.errMess = <any>errmess;
           });
     }
@@ -123,16 +122,16 @@ export class DishdetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dishservice.getDishIds()
-      .subscribe(value => this.dishIds = value);
+    this.tourservice.getTourIds()
+      .subscribe(value => this.tourIds = value);
 
     this.route.params.pipe(switchMap((params: Params) => {
       this.visibility = 'hidden';
-      return this.dishservice.getDish(+params['id']);
+      return this.tourservice.getTour(+params['id']);
     }))
       .subscribe(dish => {
-          this.dish = dish;
-          this.dishcopy = dish;
+          this.tour = dish;
+          this.tourcopy = dish;
           this.setPrevNext(dish.id);
           this.visibility = 'shown';
         },
@@ -140,9 +139,9 @@ export class DishdetailComponent implements OnInit {
   }
 
   setPrevNext(dishId: string | any) {
-    const index = this.dishIds?.indexOf(dishId);
-    this.prev = this.dishIds[(this.dishIds?.length + index - 1) % this.dishIds?.length];
-    this.next = this.dishIds[(this.dishIds?.length + index + 1) % this.dishIds?.length];
+    const index = this.tourIds?.indexOf(dishId);
+    this.prev = this.tourIds[(this.tourIds?.length + index - 1) % this.tourIds?.length];
+    this.next = this.tourIds[(this.tourIds?.length + index + 1) % this.tourIds?.length];
   }
 
   goBack(): void {

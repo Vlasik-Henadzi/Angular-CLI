@@ -5,20 +5,20 @@
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px">
 
-  <mat-card *ngIf="dish" fxFlex [@expand]>
+  <mat-card *ngIf="tour" fxFlex [@expand]>
     <mat-card-header>
       <div mat-card-avatar></div>
       <mat-card-title>
-        <h3>{{dish.name | uppercase}}</h3>
+        <h3>{{tour.name | uppercase}}</h3>
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="{{ baseURL + dish.image }}" alt={{dish.name}}>
+    <img mat-card-image src="{{ baseURL + tour.image }}" alt={{tour.name}}>
     <mat-card-content>
-      <p>{{dish.description}}
+      <p>{{tour.description}}
       </p>
     </mat-card-content>
   </mat-card>
-  <div fxFlex [hidden]="dish || errDishMess">
+  <div fxFlex [hidden]="tour || errDishMess">
     <mat-spinner></mat-spinner>
     <h4>Loading . . . Please Wait</h4>
   </div>

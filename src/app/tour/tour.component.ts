@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Dish} from '../shared/dish';
-import {DishService} from "../service/dish.service";
+import {Tour} from '../shared/tour';
+import {TourService} from "../service/tour.service";
 import {expand, flyInOut} from "../animations/app.animations";
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  templateUrl: './tour.component.html',
+  styleUrls: ['./tour.component.scss'],
   host: {
     '[@flyInOut]': 'true',
     'style': 'display: block;'
@@ -16,24 +16,24 @@ import {expand, flyInOut} from "../animations/app.animations";
     expand()
   ]
 })
-export class MenuComponent implements OnInit {
+export class TourComponent implements OnInit {
 
-  dishes: Dish[] | undefined;
+  dishes: Tour[] | undefined;
 
-  selectedDish: Dish | undefined;
+  selectedDish: Tour | undefined;
   errMess: string | undefined;
 
-  constructor(private dishService: DishService,
+  constructor(private dishService: TourService,
               @Inject('BaseURL') public baseURL: any) {
   }
 
   ngOnInit(): void {
-    this.dishService.getDishes()
+    this.dishService.getTours()
       .subscribe(dishes => this.dishes = dishes,
         errmess => this.errMess = <any>errmess);
   }
 
-  onSelect(dish: Dish) {
+  onSelect(dish: Tour) {
     this.selectedDish = dish;
   }
 }

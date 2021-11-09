@@ -1,12 +1,12 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MenuComponent } from './menu.component';
+import { TourComponent } from './tour.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Dish } from '../shared/dish';
-import { DishService } from '../service/dish.service';
-import { DISHES } from '../shared/dishes';
+import { Tour } from '../shared/tour';
+import { TourService } from '../service/tour.service';
+import { TOURS } from '../shared/TOURS';
 import { baseURL } from '../shared/baseurl';
 import { Observable, of } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -14,15 +14,15 @@ import { DebugElement } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-describe('MenuComponent', () => {
-  let component: MenuComponent;
-  let fixture: ComponentFixture<MenuComponent>;
+describe('TourComponent', () => {
+  let component: TourComponent;
+  let fixture: ComponentFixture<TourComponent>;
 
   beforeEach(async(() => {
 
     const dishServiceStub = {
-      getDishes: function(): Observable<Dish[]> {
-        return of(DISHES);
+      getDishes: function(): Observable<Tour[]> {
+        return of(TOURS);
       }
     };
 
@@ -31,22 +31,22 @@ describe('MenuComponent', () => {
         FlexLayoutModule,
         MatGridListModule,
         MatProgressSpinnerModule,
-        RouterTestingModule.withRoutes([{ path: 'menu', component: MenuComponent }])
+        RouterTestingModule.withRoutes([{ path: 'tour', component: TourComponent }])
       ],
-      declarations: [ MenuComponent ],
+      declarations: [ TourComponent ],
       providers: [
-        { provide: DishService, useValue: dishServiceStub },
+        { provide: TourService, useValue: dishServiceStub },
         { provide: 'baseURL', useValue: baseURL },
       ]
     })
       .compileComponents();
 
-    const dishservice = TestBed.get(DishService);
+    const dishservice = TestBed.get(TourService);
 
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuComponent);
+    fixture = TestBed.createComponent(TourComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -69,7 +69,7 @@ describe('MenuComponent', () => {
     de = fixture.debugElement.query(By.css('h1'));
     el = de.nativeElement;
 
-    expect(el.textContent).toContain(DISHES[0].name?.toUpperCase());
+    expect(el.textContent).toContain(TOURS[0].name?.toUpperCase());
   });
 
 });

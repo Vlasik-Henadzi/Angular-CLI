@@ -1,6 +1,6 @@
 import {Comment} from "./comment";
 
-export class Dish {
+export class Tour {
    id: string | undefined;
    name: string | undefined;
    image: string | undefined;

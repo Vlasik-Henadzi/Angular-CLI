@@ -21,8 +21,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 
 import 'hammerjs';
-import { MenuComponent } from './menu/menu.component';
-import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import { TourComponent } from './tour/tour.component';
+import { TourdetailComponent } from './tourdetail/tourdetail.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -30,7 +30,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { baseURL } from './shared/baseurl';
 
-import {DishService} from "./service/dish.service";
+import {TourService} from "./service/tour.service";
 import {PromotionService} from "./service/promotion.service";
 import {LeaderService} from "./service/leader.service";
 
@@ -41,8 +41,8 @@ import { HighlightDirective } from './directives/highlight.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
-    DishdetailComponent,
+    TourComponent,
+    TourdetailComponent,
     HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -73,7 +73,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     HttpClientModule,
     MatSliderModule
   ],
-  providers: [DishService, PromotionService, LeaderService,
+  providers: [TourService, PromotionService, LeaderService,
     {provide: 'BaseURL', useValue: baseURL}],
   entryComponents: [
     LoginComponent
