@@ -18,22 +18,22 @@ import {expand, flyInOut} from "../animations/app.animations";
 })
 export class TourComponent implements OnInit {
 
-  dishes: Tour[] | undefined;
+  tours: Tour[] | undefined;
 
-  selectedDish: Tour | undefined;
+  selectedTour: Tour | undefined;
   errMess: string | undefined;
 
-  constructor(private dishService: TourService,
+  constructor(private tourService: TourService,
               @Inject('BaseURL') public baseURL: any) {
   }
 
   ngOnInit(): void {
-    this.dishService.getTours()
-      .subscribe(dishes => this.dishes = dishes,
+    this.tourService.getTours()
+      .subscribe(dishes => this.tours = dishes,
         errmess => this.errMess = <any>errmess);
   }
 
   onSelect(dish: Tour) {
-    this.selectedDish = dish;
+    this.selectedTour = dish;
   }
 }

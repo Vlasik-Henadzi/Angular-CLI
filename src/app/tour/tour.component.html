@@ -9,18 +9,18 @@
     </div>
   </div>
 
-  <div fxFlex *ngIf="dishes" [@expand]>
+  <div fxFlex *ngIf="tours" [@expand]>
     <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/tourdetail', dish.id]" appHighlight>
-        <img height="200px" src="{{ baseURL + dish.image }}" alt={{dish.name}}>
+      <mat-grid-tile *ngFor="let tour of tours" [routerLink]="['/tourdetail', tour.id]" appHighlight>
+        <img height="200px" src="{{ baseURL + tour.image }}" alt={{tour.name}}>
         <mat-grid-tile-footer>
-          <h1> {{dish.name | uppercase}} </h1>
+          <h1> {{tour.name | uppercase}} </h1>
         </mat-grid-tile-footer>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
 
-  <div fxFlex [hidden]="dishes || errMess">
+  <div fxFlex [hidden]="tours || errMess">
     <mat-spinner></mat-spinner>
     <h4>Loading . . . Please Wait</h4>
   </div>

@@ -20,8 +20,8 @@ describe('TourComponent', () => {
 
   beforeEach(async(() => {
 
-    const dishServiceStub = {
-      getDishes: function(): Observable<Tour[]> {
+    const tourServiceStub = {
+      getTours: function(): Observable<Tour[]> {
         return of(TOURS);
       }
     };
@@ -35,13 +35,13 @@ describe('TourComponent', () => {
       ],
       declarations: [ TourComponent ],
       providers: [
-        { provide: TourService, useValue: dishServiceStub },
+        { provide: TourService, useValue: tourServiceStub },
         { provide: 'baseURL', useValue: baseURL },
       ]
     })
       .compileComponents();
 
-    const dishservice = TestBed.get(TourService);
+    const tourservice = TestBed.get(TourService);
 
   }));
 
@@ -55,13 +55,13 @@ describe('TourComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('dishes items should be 4', () => {
-    expect(component?.dishes?.length).toBe(4);
-    expect(component?.dishes ? component?.dishes[1].name : undefined ).toBe('Zucchipakoda');
-    expect(component?.dishes ? component?.dishes[3].featured : undefined).toBeFalsy();
+  it('tours items should be 4', () => {
+    expect(component?.tours?.length).toBe(4);
+    expect(component?.tours ? component?.tours[1].name : undefined ).toBe('Zucchipakoda');
+    expect(component?.tours ? component?.tours[3].featured : undefined).toBeFalsy();
   });
 
-  it('should use dishes in the template', () => {
+  it('should use tours in the template', () => {
     fixture.detectChanges();
 
     let de:      DebugElement;
