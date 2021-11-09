@@ -53,7 +53,6 @@
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
     <div *ngIf="commentForm.valid">
           <h4 matLine>{{commentForm.value.comment}}</h4>
           <p matLine>{{commentForm.value.rating}}</p>
